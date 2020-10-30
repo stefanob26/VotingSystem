@@ -18,4 +18,8 @@ public class LoginService {
 	public String login (String username, String password) {
 		return this.loginDAO.login(username, password);
 	}
+	
+	public int loginID (String username, String password) {
+		return this.loginDAO.loginID(username, password);
+	}
 }

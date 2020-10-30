@@ -25,7 +25,7 @@ public class HomeController implements Controller {
 
 			// Qui invoca il Login Service
 			String usertype= loginService.login(username, password);
-
+			int id_utente = loginService.loginID(username, password);
 			// Reindirizza alla giusta view in base allo usertype
 			switch(usertype) {
 			
@@ -34,6 +34,8 @@ public class HomeController implements Controller {
 				break;
 				
 			case "USER": 
+				
+				request.put("id_utente",id_utente);				
 				MainDispatcher.getInstance().callView("HomeUser", request);
 				break;
 			

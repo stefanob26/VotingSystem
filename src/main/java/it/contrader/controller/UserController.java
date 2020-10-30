@@ -2,8 +2,10 @@ package it.contrader.controller;
 
 import java.util.List;
 
+import it.contrader.dto.SchedaVotazioneDTO;
 import it.contrader.dto.UserDTO;
 import it.contrader.main.MainDispatcher;
+import it.contrader.service.SchedaVotazioneService;
 import it.contrader.service.UserService;
 
 /**
@@ -20,11 +22,13 @@ public class UserController implements Controller {
 	private static String sub_package = "user.";
 	
 	private UserService userService;
+	private SchedaVotazioneService schedaService;
 	/**
 	 * Costruisce un oggetto di tipo UserService per poterne usare i metodi
 	 */
 	public UserController() {
 		this.userService = new UserService();
+		this.schedaService = new SchedaVotazioneService();
 	}
 	
 	
@@ -41,6 +45,7 @@ public class UserController implements Controller {
 	public void doControl(Request request) {
 		
 		//Estrae dalla request mode e choice
+		
 		String mode = (String) request.get("mode");
 		
 		String choice = (String) request.get("choice");
@@ -49,7 +54,7 @@ public class UserController implements Controller {
 		int id;
 		String username;
 		String password;
-		String usertype;
+		String usertype = (String) request.get("usertype");
 
 		switch (mode) {
 		
@@ -107,8 +112,21 @@ public class UserController implements Controller {
 			//Impacchetta la request con la lista degli user
 			request.put("users", usersDTO);
 			MainDispatcher.getInstance().callView("User", request);
-			break;
+			break;	
+		
+		case "SCHEDELIST":
 			
+			if(usertype.equals("USER")) {
+				int id_utente = Integer.parseInt(request.get("id_utente").toString());
+				request.put("id_utente", id_utente);
+			}
+			
+			List<SchedaVotazioneDTO> schedeDTO = schedaService.getAll();
+			request.put("scheda", schedeDTO);
+			request.put("usertype", usertype);
+			
+			MainDispatcher.getInstance().callView(sub_package + "Schede", request);
+			break;
 		//Esegue uno switch sulla base del comando inserito dall'utente e reindirizza tramite il Dispatcher alla View specifica per ogni operazione
 		//con REQUEST NULL (vedi una View specifica)
 		case "GETCHOICE":
@@ -138,6 +156,18 @@ public class UserController implements Controller {
 
 			case "B":
 				MainDispatcher.getInstance().callView("HomeAdmin", null);
+				break;
+				
+			case "X":
+				id = Integer.parseInt(request.get("id_utente").toString());
+				Request req = new Request();
+				req.put("id_utente", id);
+				MainDispatcher.getInstance().callView("HomeUser", req);
+				break;
+				
+			case "S":
+				
+				MainDispatcher.getInstance().callView(sub_package + "Schede", null);
 				break;
 				
 			default:

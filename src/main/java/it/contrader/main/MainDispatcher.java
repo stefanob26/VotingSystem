@@ -71,10 +71,10 @@ public class MainDispatcher {
  * 		funzionamento : Instazia una classe view, e chiama di essa in sequenza il metodi showResult() passandogli i vari dati in
  * 						request, poi showOption ed infine submit()
 	 */
-	public void callView(String view, Request request) {
-		View oggettoView = (View) ReflectionUtils.instantiateClass("it.contrader.view." + view + "View");
-		oggettoView.showResults(request);
-		oggettoView.showOptions();
+	public void callView(String view, Request request) {		
+		View oggettoView = (View) ReflectionUtils.instantiateClass("it.contrader.view." + view + "View");	
+		oggettoView.showResults(request);		
+		oggettoView.showOptions();	
 		oggettoView.submit();
 	}
 }

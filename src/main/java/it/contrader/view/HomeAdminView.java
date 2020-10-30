@@ -15,11 +15,11 @@ import it.contrader.main.MainDispatcher;
 public class HomeAdminView extends AbstractView {
 
     private String choice;
-    
+    private String usertype = "ADMIN"; 
 	private Request request;
 
 	/**
-	 * Se la request non è nulla mostra un messaggio di benvenuto
+	 * Se la request non nulla mostra un messaggio di benvenuto
 	 */
     public void showResults(Request request) {
     	if(request!=null) {
@@ -34,9 +34,9 @@ public class HomeAdminView extends AbstractView {
     public void showOptions() {
         System.out.println("-------------MENU------------\n");
         System.out.println(" Seleziona cosa vuoi gestire:");
-        System.out.println("[U]tenti  [E]sci");
+        System.out.println("[U]tenti [S]tatistiche [E]sci");
         //Il metodo che salva l'input nella stringa choice.
-        //getInput() è definito in AbstractView.
+        //getInput() definito in AbstractView.
         choice = this.getInput();
     }
 
@@ -53,6 +53,13 @@ public class HomeAdminView extends AbstractView {
         	MainDispatcher.getInstance().callAction("User", "doControl", request);
         	break;
  
+        case "s":
+        	this.request.put("mode", "SCHEDELIST");
+        	request.put("choice", choice);
+        	request.put("usertype", usertype);
+        	MainDispatcher.getInstance().callAction("User", "doControl", request);
+        	break;
+        	
         case "e":
         	MainDispatcher.getInstance().callAction("Login", "doControl", null);
         	break;
