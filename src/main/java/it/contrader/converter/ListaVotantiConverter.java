@@ -11,7 +11,7 @@ public class ListaVotantiConverter {
 	 */
 	
 	public ListaVotantiDTO toDTO(ListaVotanti lista) {
-		ListaVotantiDTO ListaVotantiDTO = new ListaVotantiDTO(lista.getidscheda(), lista.getidutente(), lista.getvoto());
+		ListaVotantiDTO ListaVotantiDTO = new ListaVotantiDTO(lista.getidutente(), lista.getidscheda(), lista.getvoto());
 		return ListaVotantiDTO;
 	}
 	
@@ -20,7 +20,7 @@ public class ListaVotantiConverter {
 	 */
 	
 	public ListaVotanti toEntity(ListaVotantiDTO listaDTO) {
-		ListaVotanti lista = new ListaVotanti(listaDTO.getidscheda(), listaDTO.getidutente(), listaDTO.getvoto());
+		ListaVotanti lista = new ListaVotanti(listaDTO.getidutente(), listaDTO.getidscheda(), listaDTO.getvoto());
 		return lista;
 	}
 	
