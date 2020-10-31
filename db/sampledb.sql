@@ -44,7 +44,7 @@ DROP TABLE IF EXISTS `schedavotazione`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `schedavotazione` (
-  `Titolo` varchar(16) NOT NULL,
+  `Titolo` varchar(40) NOT NULL,
   `Domanda` varchar(255) DEFAULT NULL,
   `Risposta1` varchar(32) NOT NULL,
   `Risposta2` varchar(32) NOT NULL,
@@ -71,12 +71,14 @@ CREATE TABLE `listavotanti` (
 
 
 
-LOCK TABLES `user` WRITE, `schedavotazione` WRITE;
+LOCK TABLES `user` WRITE, `schedavotazione` WRITE, `listavotanti` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES ('admin','ADMIN','admin',1),('user','USER','user',2);
 
 INSERT INTO `schedavotazione` VALUES ('Riduzione parlamentari','Sei favorevole nel ridurre il numero di parlamentari?','SI', 'NO', 'NON VALIDA',1),
 ('Trivelle','Sei favorevole nell"installazione delle trivelle nel mar Adriatico?','SI', 'NO', 'NON VALIDA',2);
+
+INSERT INTO `listavotanti` VALUES (0,0,3,1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

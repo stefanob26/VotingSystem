@@ -11,7 +11,7 @@ public class StatisticaView extends AbstractView {
 	double[] risultati;
 	private Request req;
 	private final String mode = "GETCHOICE";
-	private String choice;
+	private String choice = "";
 	
 	
 	public StatisticaView() {
@@ -58,11 +58,11 @@ public class StatisticaView extends AbstractView {
 		
 		System.out.println("Premi [B] per tornare indietro");
 		String s = getInput();
-		while(!s.equals("B")) {
-			System.out.println("opzione errata digitare x per tornare indietro");
+		while(!s.equals("b")) {
+			System.out.println("opzione errata digitare b per tornare indietro");
 			s = getInput();
 		}
-		choice = s;
+		this.choice = s;
 	}
 	
 	/**
@@ -71,8 +71,9 @@ public class StatisticaView extends AbstractView {
 	@Override
 	public void submit() {
 		req = new Request();
-		req.put("choice", choice);
-		req.put("mode", mode);
+		req.put("choice", this.choice);
+		req.put("mode", this.mode);
+		req.put("usertype", "ADMIN");
 		MainDispatcher.getInstance().callAction("User", "doControl", req);
 	}
 	

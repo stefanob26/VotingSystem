@@ -5,7 +5,7 @@ import java.util.List;
 import it.contrader.dto.ListaVotantiDTO;
 import it.contrader.main.MainDispatcher;
 import it.contrader.service.ListaVotantiService;
-import it.contrader.service.UserService;
+
 
 
 public class ListaVotantiController implements Controller {
@@ -50,11 +50,18 @@ public class ListaVotantiController implements Controller {
 			id_scheda = Integer.parseInt(request.get("id_scheda").toString());
 			id_utente = Integer.parseInt(request.get("id_utente").toString());
 			boolean check = listaService.checkID(id_scheda, id_utente);
-			System.out.println(check);
 			request.put("id_scheda", id_scheda);
 			request.put("id_utente", id_utente);
 			request.put("check", check);
+			request.put("mode", "CHECK");
 			MainDispatcher.getInstance().callAction("SchedaVotazione", "doControl", request);
+			break;
+			
+		case "VOTILIST":
+			List<ListaVotantiDTO> lista1DTO = listaService.getAll();
+			//Impacchetta la request con la lista degli user
+			request.put("voti", lista1DTO);
+			MainDispatcher.getInstance().callView("VotantiLista", request);
 			break;
 			
 		case "SAVE":

@@ -20,6 +20,7 @@ public class UserController implements Controller {
 	 * definisce il pacchetto di vista user.
 	 */
 	private static String sub_package = "user.";
+	private static String sub_package1 = "scheda.";
 	
 	private UserService userService;
 	private SchedaVotazioneService schedaService;
@@ -54,7 +55,7 @@ public class UserController implements Controller {
 		int id;
 		String username;
 		String password;
-		String usertype = (String) request.get("usertype");
+		String usertype = request.get("usertype").toString();
 
 		switch (mode) {
 		
@@ -76,10 +77,10 @@ public class UserController implements Controller {
 			UserDTO usertoinsert = new UserDTO(username, password, usertype);
 			//invoca il service
 			userService.insert(usertoinsert);
-			request = new Request();
-			request.put("mode", "mode");
+			Request req1 = new Request();
+			req1.put("mode", "mode");
 			//Rimanda alla view con la risposta
-			MainDispatcher.getInstance().callView(sub_package + "UserInsert", request);
+			MainDispatcher.getInstance().callView(sub_package + "UserInsert", req1);
 			break;
 		
 		// Arriva qui dalla UserDeleteView. Estrae l'id dell'utente da cancellare e lo passa al Service
@@ -124,8 +125,15 @@ public class UserController implements Controller {
 			List<SchedaVotazioneDTO> schedeDTO = schedaService.getAll();
 			request.put("scheda", schedeDTO);
 			request.put("usertype", usertype);
-			
+	
 			MainDispatcher.getInstance().callView(sub_package + "Schede", request);
+			break;
+			
+		case "SCHEDEGEST":
+			List<SchedaVotazioneDTO> schedeDTO1 = schedaService.getAll();
+			request.put("schede", schedeDTO1);
+			request.put("usertype", usertype);
+			MainDispatcher.getInstance().callView(sub_package1 + "SchedaGestione", request);
 			break;
 		//Esegue uno switch sulla base del comando inserito dall'utente e reindirizza tramite il Dispatcher alla View specifica per ogni operazione
 		//con REQUEST NULL (vedi una View specifica)
@@ -155,6 +163,7 @@ public class UserController implements Controller {
 				break;
 
 			case "B":
+				
 				MainDispatcher.getInstance().callView("HomeAdmin", null);
 				break;
 				

@@ -29,9 +29,12 @@ public class SchedeView extends AbstractView {
 	 * gli altri due metodi
 	 */
 	public void showResults(Request request) {
+		
 		if (request != null) {
-			id_utente = Integer.parseInt(request.get("id_utente").toString());
-			usertype = request.get("usertype").toString();
+			
+			this.usertype = request.get("usertype").toString();
+			if(this.usertype.equals("USER"))
+				id_utente = Integer.parseInt(request.get("id_utente").toString());
 			System.out.println("\n------------------- Gestione schede votazioni ----------------\n");
 			System.out.println("ID\tTitolo");
 			System.out.println("----------------------------------------------------\n");

@@ -48,6 +48,7 @@ public class VotazioneView extends AbstractView {
 		 if(msg.equals("")) {
 			 
 			 voto = Integer.parseInt(getInput());
+			 
 		 }
 	}
 
@@ -63,6 +64,7 @@ public class VotazioneView extends AbstractView {
 		 
 		 if(msg.equals("")) {
 			 Request req = new Request();
+			 
 			 req.put("voto", voto);
 			 req.put("id_utente", Integer.parseInt(request1.get("id_utente").toString()));
 			 req.put("id_scheda", Integer.parseInt(request1.get("id_scheda").toString()));

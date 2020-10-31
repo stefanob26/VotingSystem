@@ -16,9 +16,9 @@ import it.contrader.model.ListaVotanti;
 public class ListaVotantiDAO {
 	private final String QUERY_ALL = "SELECT * FROM listavotanti";
 	private final String QUERY_CREATE = "INSERT INTO listavotanti (id_utente, id_scheda, voto) VALUES (?,?,?)";
-	//private final String QUERY_READ = "SELECT * FROM listavotanti WHERE id_scheda=? AND voto=?";
-	private final String QUERY_ANALYTICS = "SELECT COUNT(voto) AS total FROM listavotanti WHERE id_scheda=? AND voto=?";
-	private final String QUERY_CONTROL = "SELECT COUNT(voto) AS total FROM listavotanti WHERE id_scheda=? AND id_utente=?";
+	private final String QUERY_ANALYTICS = "SELECT COUNT(voto) AS total FROM listavotanti WHERE id_scheda = ? AND voto = ?";
+	private String QUERY_CONTROL = "SELECT * FROM listavotanti WHERE id_scheda = ? AND id_utente = ?";
+	
 	
 	public ListaVotantiDAO() {
 		
@@ -101,19 +101,21 @@ public class ListaVotantiDAO {
 	
 	public boolean checkUser(int id_scheda, int id_utente) {
 		Connection connection = ConnectionSingleton.getInstance();
-		int count = 100;
 		ResultSet rs;
+		int count = 0;
 		try {	
 			
-			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_CONTROL);
-			preparedStatement.setInt(1, id_scheda);
-			preparedStatement.setInt(2, id_utente);
-			System.out.println("t");
-			rs = preparedStatement.executeQuery();
-			rs.next();
-			count = rs.getInt("total");
-		} catch (SQLException e) {
+			PreparedStatement ps = connection.prepareStatement(QUERY_CONTROL);
+			ps.setInt(1, id_scheda);
+			ps.setInt(2, id_utente);
 			
+			rs = ps.executeQuery();
+			if(rs.next())
+				count++;
+			
+		
+		} catch (SQLException e) {
+			return false;
 		}
 		
 		if(count == 0)
