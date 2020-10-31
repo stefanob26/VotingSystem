@@ -38,7 +38,7 @@ public class VotazioneView extends AbstractView {
 		if(!msg.equals("")) {
 			
 			choice = getInput();
-			while(!choice.equals("X")) {
+			while(!choice.equals("x")) {
 				System.out.println("Digitare [X] per uscire");
 				choice = getInput();
 			}
@@ -58,13 +58,14 @@ public class VotazioneView extends AbstractView {
 			Request req = new Request();
 			req.put("mode", mode);
 			req.put("choice", choice);
+			req.put("usertype", "USER");
 			req.put("id_utente", Integer.parseInt(request1.get("id_utente").toString()));
 			MainDispatcher.getInstance().callAction("User", "doControl", req);
 		}
 		 
 		 if(msg.equals("")) {
 			 Request req = new Request();
-			 
+			 req.put("usertype", "USER");
 			 req.put("voto", voto);
 			 req.put("id_utente", Integer.parseInt(request1.get("id_utente").toString()));
 			 req.put("id_scheda", Integer.parseInt(request1.get("id_scheda").toString()));

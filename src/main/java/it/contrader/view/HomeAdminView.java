@@ -50,6 +50,7 @@ public class HomeAdminView extends AbstractView {
         switch (choice) {
         case "u":
         	this.request.put("mode", "USERLIST");
+        	this.request.put("usertype", usertype);
         	MainDispatcher.getInstance().callAction("User", "doControl", request);
         	break;
  

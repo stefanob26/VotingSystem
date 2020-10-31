@@ -17,6 +17,7 @@ public class UserView extends AbstractView {
 
 	private Request request;
 	private String choice;
+	private String usertype = "ADMIN";
 
 	public UserView() {
 		
@@ -62,6 +63,7 @@ public class UserView extends AbstractView {
 		request = new Request();
 		request.put("choice", choice);
 		request.put("mode", "GETCHOICE");
+		request.put("usertype", usertype);
 		MainDispatcher.getInstance().callAction("User", "doControl", this.request);
 	}
 

@@ -42,7 +42,7 @@ public class StatisticaView extends AbstractView {
 					s = "nulla";
 				}
 				
-				System.out.println("percentuale" +s +"\t" +r);
+				System.out.println("percentuale\t" +s +"\t" +r);
 				x++;
 			}
 			System.out.println();

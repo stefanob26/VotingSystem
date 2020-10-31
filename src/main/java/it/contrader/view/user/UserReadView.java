@@ -56,6 +56,7 @@ public class UserReadView extends AbstractView {
 		request = new Request();
 		request.put("id", id);
 		request.put("mode", mode);
+		request.put("usertype", "ADMIN");
 		MainDispatcher.getInstance().callAction("User", "doControl", request);
 	}
 
