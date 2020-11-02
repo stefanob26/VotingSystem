@@ -6,7 +6,7 @@
 <title>Login SAMPLE</title>
 </head>
 <body>
-
+	
 		<form class="login" action="LoginServlet" method="post">
 
 				<label for="user">Username: </label>

@@ -25,12 +25,13 @@ public class LoginDAO {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement statement = connection.prepareStatement(QUERY_LOGIN);
-			
+			System.out.println(username+"\t"+password);
 			statement.setString(1, username);
 			statement.setString(2, password);
 
 			
 			ResultSet resultSet;
+			
 			
 			if(statement.executeQuery().next()) {
 				resultSet = statement.executeQuery();
