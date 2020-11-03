@@ -1,13 +1,18 @@
 package it.contrader.servlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import it.contrader.dto.SchedaVotazioneDTO;
 import it.contrader.dto.UserDTO;
 import it.contrader.service.LoginService;
+import it.contrader.service.SchedaVotazioneService;
 
 
 /*
@@ -27,6 +32,7 @@ public class LoginServlet extends HttpServlet {
 		final HttpSession session = request.getSession();
 		session.setAttribute("utente", null);
 		LoginService service = new LoginService();
+		SchedaVotazioneService schedaService = new SchedaVotazioneService();
 
 		if (request != null) {
 			String username = request.getParameter("username").toString();
@@ -49,7 +55,9 @@ public class LoginServlet extends HttpServlet {
 				break;
 				
 			case "USER":
-				getServletContext().getRequestDispatcher("/homeadmin.jsp").forward(request, response);
+				List<SchedaVotazioneDTO> lista = schedaService.getAll();
+				request.setAttribute("list", lista);
+				getServletContext().getRequestDispatcher("/homeuser.jsp").forward(request, response);
 				break;
 				
 			default:

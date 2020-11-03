@@ -67,7 +67,7 @@ h2 {
 }
 .login{
 	position:fixed;
-	heigth:50%;
+	height:50%;
 	width:20%;
 	margin-left:35.6%;
 	margin-right:44.4%;
@@ -323,5 +323,4 @@ div.navbar a.active {
 	opacity: .9;
 	z-index: -1; opacity : .9;
 	width: 8%;
-}
 }

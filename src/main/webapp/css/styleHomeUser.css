@@ -1,0 +1,82 @@
+@charset "ISO-8859-1";
+
+#bodyContainer {
+	width: 80%;
+	height: 80%;
+	margin: 0 auto;
+}
+
+.main {
+	display: block;
+	width: 40%;
+	height: 60%;
+	
+}
+
+#btn1 {
+	background-color: #00ccad;
+	float: left;
+	display: block;
+	padding: 1% 2%;
+	border-radius: 7px;
+	font-size: 17px;
+	text-align: center;
+}
+
+#btn1:hover {
+	background-color: #00ccad;
+	cursor: pointer;
+}
+
+#btn2 {
+	background-color: #00a990;
+	float: left;
+	display: block;
+	padding: 1% 2%;
+	border-radius: 7px;
+	font-size: 17px;
+	text-align: center;
+}
+
+#btn2:hover {
+	background-color: #00ccad;
+	cursor: pointer;
+}
+
+
+#container {
+	
+	height:100%;
+	width:20%;
+	margin: 0 auto;
+	z-index:1;
+}
+
+.primaColonna {
+	width: 50%;
+	height: 20px;
+	float: left;
+	background-color: green;
+	color: white;
+	font-size: bold;
+	text-align: center;
+	
+}
+
+.secondaColonna {
+	width: 50%;
+	height: 20px;
+	float: right;
+	background-color: lime;
+	text-align: center;
+}
+
+.listaSchede {
+	height:100%;
+	width:40%;
+	
+	display: none;
+	clear: right;
+	margin: 0 auto;
+	z-index: 1;
+}

@@ -23,7 +23,7 @@ public class ConnectionSingleton {
                 String port="3306";
                 String dbName="sampledb";
                 String username="root";
-                String password ="DARIO19051995";
+                String password ="Pax1.pAx1.paX1";
                 String jdbcAdditionalParams="useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useLegacyDatetimeCode=false";
                 Class<?> c = Class.forName(driver);
                 System.out.println("Ho caricato: " + c.getName());
