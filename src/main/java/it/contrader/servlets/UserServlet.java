@@ -86,6 +86,10 @@ public class UserServlet extends HttpServlet {
 			updateList(request);
 			getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
 			break;
+			
+		case "BACK" :
+			getServletContext().getRequestDispatcher("/homeuser.jsp").forward(request, response);
+			
 		}
 	}
 }

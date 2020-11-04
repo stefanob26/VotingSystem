@@ -100,6 +100,7 @@ public class SchedaVotazioneServlet extends HttpServlet {
 			request.setAttribute("risposta2",scheda.getRisposta2());
 			request.setAttribute("risposta3",scheda.getRisposta3());
 			request.setAttribute("check", check);
+			request.setAttribute("titolo",scheda.getTitolo());
 			getServletContext().getRequestDispatcher("/user/VotazioneView.jsp").forward(request, response);
 			
 			break;
@@ -109,3 +110,4 @@ public class SchedaVotazioneServlet extends HttpServlet {
 	
 	}
 }
+

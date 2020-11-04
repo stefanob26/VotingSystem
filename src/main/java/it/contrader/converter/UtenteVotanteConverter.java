@@ -35,5 +35,11 @@ public class UtenteVotanteConverter implements Converter<UtenteVotante, UtenteVo
 		}
 		return utenteDTOList;
 	}
+	
+	public double[] getStatistica(double[] aperc) {
+		double[] perc = new double[3];
+		perc = aperc;
+		return perc;
+	}
 
 }
