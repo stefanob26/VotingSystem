@@ -36,7 +36,7 @@ public class SchedaVotazioneServlet extends HttpServlet {
 		
 		case "SCHEDELIST":
 			updateList(request);
-			getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/user/schedamanager.jsp").forward(request, response);
 			break;
 			
 		case "READ":
@@ -45,11 +45,11 @@ public class SchedaVotazioneServlet extends HttpServlet {
 			request.setAttribute("dto", dto);
 			
 			if (request.getParameter("update") == null) {
-				 getServletContext().getRequestDispatcher("/user/readscheda.jsp").forward(request, response);
+				 getServletContext().getRequestDispatcher("/scheda/readscheda.jsp").forward(request, response);
 				
 			}
 			
-			else getServletContext().getRequestDispatcher("/user/updatescheda.jsp").forward(request, response);
+			else getServletContext().getRequestDispatcher("/scheda/updatescheda.jsp").forward(request, response);
 			
 			break;	
 			
@@ -63,7 +63,7 @@ public class SchedaVotazioneServlet extends HttpServlet {
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
-			getServletContext().getRequestDispatcher("/user/schedemanager.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/scheda/schedamanager.jsp").forward(request, response);
 			break;
 			
 			
@@ -77,7 +77,7 @@ public class SchedaVotazioneServlet extends HttpServlet {
 			dto = new SchedaVotazioneDTO(titolo,domanda,risposta1, risposta2, risposta3);
 			ans = service.update(dto);
 			updateList(request);
-			getServletContext().getRequestDispatcher("/user/schedemanager.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/scheda/schedamanager.jsp").forward(request, response);
 			break;	
 			
 		case "DELETE":
@@ -85,7 +85,7 @@ public class SchedaVotazioneServlet extends HttpServlet {
 			ans = service.delete(id_scheda);
 			request.setAttribute("ans", ans);
 			updateList(request);
-			getServletContext().getRequestDispatcher("/user/schedemanager.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/scheda/schedamanager.jsp").forward(request, response);
 			break;	
 		
 		case "CHECK":
@@ -101,7 +101,7 @@ public class SchedaVotazioneServlet extends HttpServlet {
 			request.setAttribute("risposta3",scheda.getRisposta3());
 			request.setAttribute("check", check);
 			request.setAttribute("titolo",scheda.getTitolo());
-			getServletContext().getRequestDispatcher("/user/VotazioneView.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/VotazioneView.jsp").forward(request, response);
 			
 			break;
 		}

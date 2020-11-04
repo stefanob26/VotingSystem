@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.contrader.dto.SchedaVotazioneDTO;
 import it.contrader.dto.UtenteVotanteDTO;
+import it.contrader.service.SchedaVotazioneService;
 import it.contrader.service.UtenteVotanteService;
 
  public class UtenteVotanteServlet extends HttpServlet {
@@ -26,6 +28,7 @@ import it.contrader.service.UtenteVotanteService;
  	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			UtenteVotanteService service = new UtenteVotanteService();
+			SchedaVotazioneService schedaservice = new SchedaVotazioneService();
 			String mode = request.getParameter("mode");
 			UtenteVotanteDTO dto;
 			int id_scheda;
@@ -64,11 +67,15 @@ import it.contrader.service.UtenteVotanteService;
 	
 	case "STAT":
 		id_scheda = Integer.parseInt(request.getParameter("id_scheda"));
+		SchedaVotazioneDTO s = schedaservice.read(id_scheda);
 		double[] risultati = service.getStatistca(id_scheda);
 		double totale = risultati[0] + risultati[1] + risultati[2];
 		risultati[0] = (risultati[0]/totale)*100;
 		risultati[1] = (risultati[1]/totale)*100;
 		risultati[2] = (risultati[2]/totale)*100;
+		request.setAttribute("risposta1", s.getRisposta1());
+		request.setAttribute("risposta2", s.getRisposta2());
+		request.setAttribute("risposta3", s.getRisposta3());
 		request.setAttribute("risultati", risultati);
 		request.setAttribute("id_scheda", id_scheda);
 		getServletContext().getRequestDispatcher("/user/statisticheview.jsp").forward(request, response);
