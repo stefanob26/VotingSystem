@@ -9,7 +9,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import it.contrader.dto.SchedaVotazioneDTO;
 import it.contrader.dto.UserDTO;
+import it.contrader.service.SchedaVotazioneService;
 import it.contrader.service.Service;
 import it.contrader.service.UserService;
 
@@ -32,6 +35,7 @@ public class UserServlet extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Service<UserDTO> service = new UserService();
 		String mode = request.getParameter("mode");
+		Service<SchedaVotazioneDTO> schedaService = new SchedaVotazioneService(); 
 		UserDTO dto;
 		int id;
 		boolean ans;
@@ -88,6 +92,8 @@ public class UserServlet extends HttpServlet {
 			break;
 			
 		case "BACK" :
+			List<SchedaVotazioneDTO> lista = schedaService.getAll();
+			request.setAttribute("list", lista);
 			getServletContext().getRequestDispatcher("/homeuser.jsp").forward(request, response);
 			
 		}

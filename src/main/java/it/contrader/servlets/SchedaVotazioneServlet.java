@@ -27,7 +27,7 @@ public class SchedaVotazioneServlet extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Service<SchedaVotazioneDTO> service = new SchedaVotazioneService();
 		SchedaVotazioneDTO scheda = new SchedaVotazioneDTO();
-		String mode = request.getParameter("mode");
+		String mode = (String) request.getParameter("mode");
 		SchedaVotazioneDTO dto;
 		int id_scheda;
 		boolean ans;
@@ -88,22 +88,6 @@ public class SchedaVotazioneServlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/scheda/schedamanager.jsp").forward(request, response);
 			break;	
 		
-		case "CHECK":
-			id_scheda = Integer.parseInt(request.getParameter("id_scheda"));
-			int id_utente = Integer.parseInt(request.getParameter("id_utente"));
-			boolean check = Boolean.parseBoolean(request.getParameter("check"));
-			scheda = service.read(id_scheda);
-			request.setAttribute("id_scheda", id_scheda);
-			request.setAttribute("id_utente", id_utente);
-			request.setAttribute("domanda", scheda.getDomanda());
-			request.setAttribute("risposta1",scheda.getRisposta1());
-			request.setAttribute("risposta2",scheda.getRisposta2());
-			request.setAttribute("risposta3",scheda.getRisposta3());
-			request.setAttribute("check", check);
-			request.setAttribute("titolo",scheda.getTitolo());
-			getServletContext().getRequestDispatcher("/VotazioneView.jsp").forward(request, response);
-			
-			break;
 		}
 		
 	

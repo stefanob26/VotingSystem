@@ -31,6 +31,8 @@ import it.contrader.service.UtenteVotanteService;
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			UtenteVotanteService service = new UtenteVotanteService();
 			SchedaVotazioneService schedaservice = new SchedaVotazioneService();
+			final HttpSession session = request.getSession();
+			UserDTO u = (UserDTO) session.getAttribute("user");
 			String mode = request.getParameter("mode");
 			UtenteVotanteDTO dto;
 			int id_scheda;
@@ -46,27 +48,29 @@ import it.contrader.service.UtenteVotanteService;
 		break;
 	
 	case "CONTROL":
-		final HttpSession session = request.getSession();
-		UserDTO u = (UserDTO) session.getAttribute("user");
 		id_scheda = Integer.parseInt(request.getParameter("id_scheda"));
 		id_utente = u.getId();
 		boolean check = service.checkUser(id_scheda, id_utente);
-		request.setAttribute("id_scheda", id_scheda);
-		request.setAttribute("id_utente", id_utente);
+		if(check) {
+			SchedaVotazioneDTO s = (SchedaVotazioneDTO) schedaservice.read(id_scheda);
+			request.setAttribute("scheda", s);
+			
+		}
 		request.setAttribute("check", check);
-		request.setAttribute("mode", "CHECK");
-		getServletContext().getRequestDispatcher("/SchedaVotazioneServlet.java").forward(request, response);
+		getServletContext().getRequestDispatcher("/VotazioneView.jsp").forward(request, response);
 		break;
 	
 	case "INSERT":
 		id_scheda = Integer.parseInt(request.getParameter("id_scheda"));
-		id_utente = Integer.parseInt(request.getParameter("id_utente"));
-		voto = Integer.parseInt(request.getParameter("voto"));
+		id_utente = u.getId();
+		voto = Integer.parseInt(request.getParameter("risposta"));
 		dto = new UtenteVotanteDTO (id_utente,id_scheda,voto);
 		boolean ans = service.insert(dto);
 		request.setAttribute("ans", ans);
 		updateList(request);
-		getServletContext().getRequestDispatcher("/user/votantimanager.jsp").forward(request, response);
+		List<SchedaVotazioneDTO> lista = schedaservice.getAll();
+		request.setAttribute("list", lista);
+		getServletContext().getRequestDispatcher("/homeuser.jsp").forward(request, response);
 		break;
 	
 	case "STAT":
@@ -82,7 +86,7 @@ import it.contrader.service.UtenteVotanteService;
 		request.setAttribute("risposta3", s.getRisposta3());
 		request.setAttribute("risultati", risultati);
 		request.setAttribute("id_scheda", id_scheda);
-		getServletContext().getRequestDispatcher("/user/statisticheview.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/scheda/schedastat.jsp").forward(request, response);
 		break;
 		}
 	}	

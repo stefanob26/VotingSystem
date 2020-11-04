@@ -288,6 +288,7 @@ div.navbar {
 	overflow: hidden;
 	position: sticky;
 	width: 100%;
+	
 	top: 0;
 	padding: 1px;
 	z-index: 2;
