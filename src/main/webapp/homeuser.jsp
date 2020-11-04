@@ -83,7 +83,7 @@
 			<td>
 				<%=s.getTitolo()%>
 			</td>
-			<td><a href="#">
+			<td><a href=UtenteVotanteServlet?mode=control&id_scheda=<%=s.getId()%>>
 				VOTA
 			</a></td>
 		</tr>

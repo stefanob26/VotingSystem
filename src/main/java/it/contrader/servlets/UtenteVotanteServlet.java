@@ -7,8 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.contrader.dto.SchedaVotazioneDTO;
+import it.contrader.dto.UserDTO;
 import it.contrader.dto.UtenteVotanteDTO;
 import it.contrader.service.SchedaVotazioneService;
 import it.contrader.service.UtenteVotanteService;
@@ -44,14 +46,16 @@ import it.contrader.service.UtenteVotanteService;
 		break;
 	
 	case "CONTROL":
+		final HttpSession session = request.getSession();
+		UserDTO u = (UserDTO) session.getAttribute("user");
 		id_scheda = Integer.parseInt(request.getParameter("id_scheda"));
-		id_utente = Integer.parseInt(request.getParameter("id_utente"));
+		id_utente = u.getId();
 		boolean check = service.checkUser(id_scheda, id_utente);
 		request.setAttribute("id_scheda", id_scheda);
 		request.setAttribute("id_utente", id_utente);
 		request.setAttribute("check", check);
 		request.setAttribute("mode", "CHECK");
-		getServletContext().getRequestDispatcher("/src/main/java/it/contrader/servlets/SchedaVotazioneServlet.java").forward(request, response);
+		getServletContext().getRequestDispatcher("/SchedaVotazioneServlet.java").forward(request, response);
 		break;
 	
 	case "INSERT":
