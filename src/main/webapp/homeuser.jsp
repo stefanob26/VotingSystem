@@ -47,7 +47,7 @@
 <div id="bodyContainer">
 <%@include file="css/header.jsp"%>
 
-
+<div id="CorpoCentrale">
 <div class="navbar">
   
   <div id="btn1">Home</div>
@@ -57,14 +57,13 @@
 
 <div class="main">
 	
-	<div id="container">
+	<div id="gen">
 		<div class="primaColonna">ID</div><div class="secondaColonna">${user.getId()}</div>
 		<div class="primaColonna">USERNAME</div><div class="secondaColonna">${user.getUsername()}</div>
 		<div class="primaColonna">TIPO UTENTE</div><div class="secondaColonna">${user.getUsertype()}</div>
 	</div>
-</div>
-
-<div class="listaSchede">
+	
+	<div class="listaSchede">
 
 	<%
 		List<SchedaVotazioneDTO> list = (List<SchedaVotazioneDTO>) request.getAttribute("list");
@@ -93,6 +92,10 @@
 	</table>
 
 </div>
+	
+</div>
+</div>
+
 
 
 <%@ include file="css/footer.jsp" %>
