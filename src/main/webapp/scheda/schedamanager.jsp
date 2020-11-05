@@ -14,6 +14,8 @@
 <div class="navbar">
   <a  href="homeadmin.jsp">Home</a>
   <a class="active" href="UserServlet?mode=userlist">Users</a>
+  <a href="SchedaVotazioneServlet?mode=schedelist">Gestione schede</a>
+  <a href="UtenteVotanteServlet?mode=votolist">Lista voti</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <div class="main">
@@ -36,10 +38,10 @@
 		%>
 		<tr>
 			<td><%=s.getTitolo()%></td>
-			<td><a href=SchedaVotazioneServlet?mode=read&id=<%=s.getId()%>>LEGGI</a></td>
-			<td><a href=SchedaVotazioneServlet?mode=read&update=true&id=<%=s.getId()%>>MODIFICA</a></td>
-			<td><a href=SchedaVotazioneServlet?mode=delete&id=<%=s.getId()%>>ELIMINA</a></td>			
-			<td><a href=SchedaVotazioneServlet?mode=stat&id_scheda=<%=s.getId()%>>STAT</a></td>
+			<td><a href=SchedaVotazioneServlet?mode=read&id_scheda=<%=s.getId()%>>LEGGI</a></td>
+			<td><a href=SchedaVotazioneServlet?mode=read&update=true&id_scheda=<%=s.getId()%>>MODIFICA</a></td>
+			<td><a href=SchedaVotazioneServlet?mode=delete&id_scheda=<%=s.getId()%>>ELIMINA</a></td>			
+			<td><a href=UtenteVotanteServlet?mode=stat&id_scheda=<%=s.getId()%>>STAT</a></td>
 		</tr>
 		<%
 			}
@@ -48,7 +50,7 @@
 
 
 
-<form id="floatright" action="UserServlet?mode=insert" method="post">
+<form id="floatright" action="SchedaVotazioneServlet?mode=insert" method="post">
   <div class="row">
     <div class="col-25">
       <label for="titolo">Titolo</label>

@@ -44,7 +44,7 @@ import it.contrader.service.UtenteVotanteService;
 
 	case "VOTOLIST":
 		updateList(request);
-		getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/ListaVotanti.jsp").forward(request, response);
 		break;
 	
 	case "CONTROL":

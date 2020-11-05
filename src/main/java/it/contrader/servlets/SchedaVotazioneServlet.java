@@ -36,7 +36,7 @@ public class SchedaVotazioneServlet extends HttpServlet {
 		
 		case "SCHEDELIST":
 			updateList(request);
-			getServletContext().getRequestDispatcher("/user/schedamanager.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/scheda/schedamanager.jsp").forward(request, response);
 			break;
 			
 		case "READ":
@@ -49,16 +49,16 @@ public class SchedaVotazioneServlet extends HttpServlet {
 				
 			}
 			
-			else getServletContext().getRequestDispatcher("/scheda/updatescheda.jsp").forward(request, response);
+			else getServletContext().getRequestDispatcher("/scheda/schedaupdate.jsp").forward(request, response);
 			
 			break;	
 			
 		case "INSERT":
-			String titolo = request.getParameter("titolo").toString();
-			String domanda = request.getParameter("domanda").toString();
-			String risposta1 = request.getParameter("risposta1").toString();
-			String risposta2 = request.getParameter("risposta2").toString();
-			String risposta3 = request.getParameter("risposta3").toString();
+			String titolo = request.getParameter("titolo");
+			String domanda = request.getParameter("domanda");
+			String risposta1 = request.getParameter("risposta1");
+			String risposta2 = request.getParameter("risposta2");
+			String risposta3 = request.getParameter("risposta3");
 			dto = new SchedaVotazioneDTO(titolo,domanda,risposta1, risposta2, risposta3);
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
@@ -74,7 +74,7 @@ public class SchedaVotazioneServlet extends HttpServlet {
 			risposta2 = request.getParameter("risposta2");
 			risposta3 = request.getParameter("risposta3");
 			id_scheda = Integer.parseInt(request.getParameter("id_scheda"));
-			dto = new SchedaVotazioneDTO(titolo,domanda,risposta1, risposta2, risposta3);
+			dto = new SchedaVotazioneDTO(id_scheda,titolo,domanda,risposta1, risposta2, risposta3);
 			ans = service.update(dto);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/scheda/schedamanager.jsp").forward(request, response);

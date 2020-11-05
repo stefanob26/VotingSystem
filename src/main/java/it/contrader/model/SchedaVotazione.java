@@ -98,6 +98,21 @@ public class SchedaVotazione {
 				return false;
 		} else if (!Domanda.equals(other.Domanda))
 			return false;
+		if (Risposta1 == null) {
+			if (other.Risposta1 != null)
+				return false;
+		} else if (!Risposta1.equals(other.Risposta1))
+			return false;
+		if (Risposta2 == null) {
+			if (other.Risposta2 != null)
+				return false;
+		} else if (!Risposta2.equals(other.Risposta2))
+			return false;
+		if (Risposta3 == null) {
+			if (other.Risposta3 != null)
+				return false;
+		} else if (!Risposta3.equals(other.Risposta3))
+			return false;
 		
 		return true;
 	}

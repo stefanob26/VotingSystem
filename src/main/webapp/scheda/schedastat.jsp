@@ -12,7 +12,8 @@
 <div class="navbar">
   <a href="homeadmin.jsp">Home</a>
   <a class="active"  href="UserServlet?mode=userlist">Users</a>
-  <a class="active"  href="SchedaVotazioneServlet?mode=schedelist">Gestione schede</a>
+  <a href="SchedaVotazioneServlet?mode=schedelist">Gestione schede</a>
+  <a href="UtenteVotanteServlet?mode=votolist">Lista voti</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <br>
@@ -20,9 +21,9 @@
 <%double[] risultati = (double[]) request.getAttribute("risultati");%>
 <table>
 	<tr> 
-		<th><%=request.getParameter("risposta1")%></th>
-		<th><%=request.getParameter("risposta2")%></th>
-		<th><%=request.getParameter("risposta3")%></th>
+		<th><%=request.getAttribute("risposta1").toString()%></th>
+		<th><%=request.getAttribute("risposta2").toString()%></th>
+		<th><%=request.getAttribute("risposta3").toString()%></th>
 	</tr>
 	<tr>
 		<td><%=risultati[0]%></td>
